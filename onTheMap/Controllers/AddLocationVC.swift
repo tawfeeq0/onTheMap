@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AddLocationVC: UIViewController {
 
@@ -18,7 +19,7 @@ class AddLocationVC: UIViewController {
         super.viewDidLoad()
         updateUI()
         cityTF.delegate = self
-        cityTF.delegate = self
+        urlTF.delegate = self
         disableButton(true)
         // Do any additional setup after loading the view.
     }
@@ -41,8 +42,33 @@ class AddLocationVC: UIViewController {
     }
     
 
+    @IBAction func showLocation(_ sender: Any) {
+        loadingIndicator(true)
+        let geocoder = CLGeocoder()
+        if let text = cityTF.text {
+            geocoder.geocodeAddressString(text) { (placeMarks, error) in
+                self.loadingIndicator(false)
+                guard let mark = placeMarks?.first else {
+                    self.showAlert("location entered doesn't exist")
+                    return
+                }
+                
+                self.performSegue(withIdentifier: "showLocation", sender: (mark,self.urlTF.text))
+            }
+        }
+        
+        
+        
+    }
     @IBAction func cancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        return
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showLocation", let vc = segue.destination as? ShowLocationVC {
+            vc.param = (sender as! (CLPlacemark?,String?)?)
+        }
     }
 
 }

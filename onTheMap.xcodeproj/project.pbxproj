@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8505927E21B1613900372174 /* StudentLoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505927D21B1613900372174 /* StudentLoc.swift */; };
 		8505928021B19AF600372174 /* AddLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505927F21B19AF600372174 /* AddLocationVC.swift */; };
+		8505928221B1A66A00372174 /* ShowLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505928121B1A66A00372174 /* ShowLocationVC.swift */; };
 		85256DC421A90BB50025AE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85256DC321A90BB50025AE1D /* AppDelegate.swift */; };
 		85256DC621A90BB50025AE1D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85256DC521A90BB50025AE1D /* LoginVC.swift */; };
 		85256DCB21A90BBC0025AE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85256DCA21A90BBC0025AE1D /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		8505927D21B1613900372174 /* StudentLoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLoc.swift; sourceTree = "<group>"; };
 		8505927F21B19AF600372174 /* AddLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationVC.swift; sourceTree = "<group>"; };
+		8505928121B1A66A00372174 /* ShowLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLocationVC.swift; sourceTree = "<group>"; };
 		85256DC021A90BB50025AE1D /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85256DC321A90BB50025AE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85256DC521A90BB50025AE1D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				85CF843121A9A18400B2A17B /* MapVC.swift */,
 				85CF843321A9A1D300B2A17B /* MapListVC.swift */,
 				8505927F21B19AF600372174 /* AddLocationVC.swift */,
+				8505928121B1A66A00372174 /* ShowLocationVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				85CF843921A9E07900B2A17B /* HttpRequest.swift in Sources */,
 				85CF843721A9ADC900B2A17B /* Auth.swift in Sources */,
 				85CF843B21ADB9DB00B2A17B /* Constants.swift in Sources */,
+				8505928221B1A66A00372174 /* ShowLocationVC.swift in Sources */,
 				8505928021B19AF600372174 /* AddLocationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -52,3 +52,29 @@ struct StudentsLocResponse:Codable{
     }
 }
 
+struct PublicUserResponse:Codable{
+    var user:User?
+    struct User : Codable {
+        var key : String?
+        var first_name : String?
+        var last_name : String?
+        var nickname : String?
+    }
+}
+
+struct AddLocationRequest:Codable {
+    var uniqueKey:String?
+    var firstName:String?
+    var lastName:String?
+    var mapString:String?
+    var mediaURL:String?
+    var latitude:Double?
+    var longitude:Double?
+}
+
+struct AddLocationResponse:Codable {
+    var createdAt:String?
+    var objectId:String?
+}
+
+

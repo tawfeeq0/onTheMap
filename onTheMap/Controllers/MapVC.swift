@@ -13,7 +13,7 @@ class MapVC: UIViewController {
     
 
     @IBOutlet weak var mapView: MKMapView!
-    let studentLocParams = StudentLocParams(limit:100,skip:0,order:"-updatedAt")
+    let studentLocParams = StudentLocParams(limit:100,skip:0,order:"-updatedAt",search:nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class MapVC: UIViewController {
             if let results = response.results {
                 for student in results {
                     let annotation = MKPointAnnotation()
-                    annotation.title = "\(student.firstName!) \(student.lastName!)"
+                    annotation.title = "\(student.firstName ?? "N/A") \(student.lastName ?? "N/A")"
                     annotation.subtitle = student.mediaURL!
                     annotation.coordinate = CLLocationCoordinate2D(latitude: student.latitude!, longitude: student.longitude!)
                     self.mapView.addAnnotation(annotation)

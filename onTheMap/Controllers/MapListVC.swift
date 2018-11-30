@@ -11,7 +11,7 @@ import UIKit
 class MapListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    let studentLocParams = StudentLocParams(limit:100,skip:0,order:"-updatedAt")
+    let studentLocParams = StudentLocParams(limit:100,skip:0,order:"-updatedAt",search:nil)
     var studentList = [StudentsLocResponse.Result]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ extension MapListVC : UITableViewDataSource,UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath)
         
         let student = studentList[indexPath.row]
-        cell.textLabel?.text = "\(student.firstName!) \(student.lastName!)"
+        cell.textLabel?.text = "\(student.firstName ?? "N/A") \(student.lastName ?? "N/A")"
         cell.detailTextLabel?.text = student.mediaURL
         cell.imageView?.image = UIImage(named: "mapSign")
         return cell

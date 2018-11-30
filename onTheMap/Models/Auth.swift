@@ -13,6 +13,7 @@ class Auth {
     
     static var loginResponse : LoginResponse?
     static var signoutResponse : SignoutResponse?
+    static var userId :String?
     static func login(email:String?,password:String?,callback:@escaping  (String?)->Void){
         var result:String?
         let userReq = LoginRequest(username: email!, password: password!)
@@ -33,6 +34,7 @@ class Auth {
                     loginResponse = try? JSONDecoder().decode(LoginResponse.self, from:data.subdata(in: (5..<data.count)) )
                     if let _ = loginResponse?.account?.key {
                         result =  HttpLoginStatus.SUCCESS.rawValue
+                        userId = loginResponse?.account?.key
                     }
                     else{
                         result = HttpLoginStatus.DATA_ERROR.rawValue

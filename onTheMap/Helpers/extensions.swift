@@ -16,6 +16,13 @@ extension UIColor {
     }
 }
 
+extension Dictionary {
+    
+    static func += (lhs: inout Dictionary, rhs: Dictionary) {
+        lhs.merge(rhs) { (_, new) in new }
+    }
+}
+
 extension UIViewController{
     func logout(){
         Auth.logout(){ (response) in
@@ -47,7 +54,9 @@ extension UIViewController{
     }
     
     func openURL(url:String){
-        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+        if let url = URL(string: url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     

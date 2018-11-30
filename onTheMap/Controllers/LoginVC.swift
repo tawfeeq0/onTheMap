@@ -15,7 +15,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTF : UITextField!
     @IBOutlet weak var loginButton : UIButton!
     @IBOutlet weak var signUpButton : UIButton!
-    var alert : UIAlertController?
     var activityIndicator =  UIActivityIndicatorView()
     
     override func viewDidLoad() {
