@@ -10,13 +10,27 @@ import UIKit
 
 class HttpRequest{
     
-    static func getData(from url: String,method:HttpMethod,header:[String:String],body:Data, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+    static func getData(from url: String,method:HttpMethod,header:[String:String],hasCookie:Bool,body:Data?, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = HttpMethod.POST.rawValue
+        request.httpMethod = method.rawValue
         for (key, value) in header {
             request.addValue(value, forHTTPHeaderField: key)
         }
-        request.httpBody = body
+        if(body != nil){
+            request.httpBody = body
+        }
+        if(hasCookie){
+            var xsrfCookie: HTTPCookie? = nil
+            let sharedCookieStorage = HTTPCookieStorage.shared
+            for cookie in sharedCookieStorage.cookies! {
+                if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+            }
+            if let xsrfCookie = xsrfCookie {
+                request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+            }
+        }
+        
+        
         URLSession.shared.dataTask(with: request, completionHandler: completion).resume()
     }
 }

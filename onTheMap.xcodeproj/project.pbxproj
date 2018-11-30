@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8505927E21B1613900372174 /* StudentLoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505927D21B1613900372174 /* StudentLoc.swift */; };
 		85256DC421A90BB50025AE1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85256DC321A90BB50025AE1D /* AppDelegate.swift */; };
 		85256DC621A90BB50025AE1D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85256DC521A90BB50025AE1D /* LoginVC.swift */; };
 		85256DCB21A90BBC0025AE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85256DCA21A90BBC0025AE1D /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8505927D21B1613900372174 /* StudentLoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLoc.swift; sourceTree = "<group>"; };
 		85256DC021A90BB50025AE1D /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85256DC321A90BB50025AE1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85256DC521A90BB50025AE1D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -101,7 +103,8 @@
 		85256DD721A90D020025AE1D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				85CF843521A9AD8500B2A17B /* Authentication */,
+				85CF843621A9ADC900B2A17B /* Auth.swift */,
+				8505927D21B1613900372174 /* StudentLoc.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,14 +118,6 @@
 				85CF843C21ADBEA800B2A17B /* Codables.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		85CF843521A9AD8500B2A17B /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				85CF843621A9ADC900B2A17B /* Auth.swift */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +195,7 @@
 				85CF843221A9A18400B2A17B /* MapVC.swift in Sources */,
 				85256DC421A90BB50025AE1D /* AppDelegate.swift in Sources */,
 				85CF843421A9A1D300B2A17B /* MapListVC.swift in Sources */,
+				8505927E21B1613900372174 /* StudentLoc.swift in Sources */,
 				85CF843D21ADBEA800B2A17B /* Codables.swift in Sources */,
 				85CF842E21A9230300B2A17B /* extensions.swift in Sources */,
 				85CF843921A9E07900B2A17B /* HttpRequest.swift in Sources */,

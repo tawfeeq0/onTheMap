@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 struct UserResponse : Codable{
     var account : Account?
@@ -34,3 +35,26 @@ struct UserRequest : Codable{
         self.udacity = Udacity(username: username, password: password)
     }
 }
+
+struct SignoutResponse:Codable{
+    var session:Session?
+    
+    struct Session : Codable {
+        var id : String?
+        var expiration : String?
+    }
+}
+
+struct StudentsLocResponse:Codable{
+    var results:[Result]?
+    
+    struct Result : Codable {
+        var uniqueKey : String?
+        var firstName : String?
+        var lastName : String?
+        var mediaURL : String?
+        var latitude : Double?
+        var longitude : Double?
+    }
+}
+

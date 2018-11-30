@@ -15,21 +15,18 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTF : UITextField!
     @IBOutlet weak var loginButton : UIButton!
     @IBOutlet weak var signUpButton : UIButton!
-    @IBOutlet weak var feedbackLabel : UILabel!
+    var alert : UIAlertController?
+    var activityIndicator =  UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
         emailTF.delegate = self
         passwordTF.delegate = self
         disableLoginButton(true)
+        
     }
+    
     
     func updateUI(){
         addRedius(component: emailTF)
@@ -56,23 +53,19 @@ class LoginVC: UIViewController {
     
     
     @IBAction func login(){
-        feedbackLabel.text = ""
         self.view.endEditing(true)
-        
-        showAlert(title: "Error", message: "unkown")
+        loadingIndicator(true)
         Auth.login(email: emailTF.text!, password: passwordTF.text!) { (response) in
-            self.dismiss(animated: false, completion: nil)
+            self.loadingIndicator(false)
             guard let response = response else {
-                //self.showAlert(title: "Error", message: "unkown")
-                self.feedbackLabel.text = "UNKOWN"
                 return
             }
             if response == HttpLoginStatus.SUCCESS.rawValue {
                 self.performSegue(withIdentifier: "login", sender: nil)
+                return
             }
             else {
-                self.feedbackLabel.text = response
-                //self.showAlert(title: "Error", message: response)
+                self.showAlert(response)
                 return
             }
         }
@@ -96,7 +89,6 @@ extension LoginVC : UITextFieldDelegate{
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("begin")
         textField.becomeFirstResponder()
     }
     
@@ -110,6 +102,28 @@ extension LoginVC : UITextFieldDelegate{
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    func showAlert(_ message:String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    func loadingIndicator(_ show:Bool) {
+        if(show){
+            loginButton.isEnabled = false
+            loginButton.alpha = 0.5
+            activityIndicator.center = CGPoint(x: loginButton.bounds.size.width/2, y: loginButton.bounds.size.height/2)
+            loginButton.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+        }
+        else{
+            loginButton.isEnabled = true
+            loginButton.alpha = 1.0
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+        }
+        
+        
     }
 }
 

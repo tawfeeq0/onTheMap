@@ -17,14 +17,19 @@ extension UIColor {
 }
 
 extension UIViewController{
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+    func logout(){
+        Auth.logout(){ (response) in
+            guard let response = response else {
+                return
+            }
+            if response == HttpLoginStatus.SUCCESS.rawValue {
+                self.performSegue(withIdentifier: "logout", sender: nil)
+                return
+            }
+            else {
+                return
+            }
+        }
     }
     
     

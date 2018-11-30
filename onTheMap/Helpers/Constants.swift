@@ -10,7 +10,10 @@ import UIKit
 
 struct Constants {
     static let LOGIN_URL = "https://www.udacity.com/api/session"
-    static let HEADER_JSON = ["Accept":"application/json","Content-Type":"application/json"]
+    static let STUDENTS_LOC_URL = "https://parse.udacity.com/parse/classes/StudentLocation"
+    static let HEADER_LOGIN_JSON = ["Accept":"application/json","Content-Type":"application/json"]
+    static let HEADER_AUTH = ["X-Parse-Application-Id":"QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr",
+                              "X-Parse-REST-API-Key":"QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"]
     static let SIGNUP_URL = "https://auth.udacity.com/sign-up"
 }
 
@@ -23,4 +26,21 @@ enum HttpLoginStatus : String {
 
 enum HttpMethod : String{
     case GET,POST,PUT,DELETE
+}
+struct StudentLocParams{
+    var limit:Int
+    var skip:Int?
+    var order:String?
+    
+    func getUrl() -> String{
+        var url =  "\(Constants.STUDENTS_LOC_URL)?limit=\(limit)"
+        if let skip = skip {
+            url += "&skip=\(skip)"
+        }
+        if let order = order {
+            url += "&order=\(order)"
+        }
+        return url
+        
+    }
 }
