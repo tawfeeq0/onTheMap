@@ -11,11 +11,11 @@ import UIKit
 
 class Auth {
     
-    static var authResponse : UserResponse?
+    static var loginResponse : LoginResponse?
     static var signoutResponse : SignoutResponse?
     static func login(email:String?,password:String?,callback:@escaping  (String?)->Void){
         var result:String?
-        let userReq = UserRequest(username: email!, password: password!)
+        let userReq = LoginRequest(username: email!, password: password!)
         let jsonData = try! JSONEncoder().encode(userReq)
         
         HttpRequest.getData(from: Constants.LOGIN_URL, method: HttpMethod.POST, header: Constants.HEADER_LOGIN_JSON, hasCookie: false,body: jsonData) { (data, response, error) in
@@ -30,8 +30,8 @@ class Auth {
                     result = HttpLoginStatus.AUTH_ERROR.rawValue
                 }
                 else {
-                    authResponse = try? JSONDecoder().decode(UserResponse.self, from:data.subdata(in: (5..<data.count)) )
-                    if let _ = authResponse?.account?.key {
+                    loginResponse = try? JSONDecoder().decode(LoginResponse.self, from:data.subdata(in: (5..<data.count)) )
+                    if let _ = loginResponse?.account?.key {
                         result =  HttpLoginStatus.SUCCESS.rawValue
                     }
                     else{

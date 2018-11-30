@@ -32,5 +32,23 @@ extension UIViewController{
         }
     }
     
+    func addRedius(component: UIControl){
+        component.layer.cornerRadius = 5
+        component.layer.borderColor = UIColor.lightGray.cgColor
+        component.layer.borderWidth = 0.5
+        component.clipsToBounds = true
+        
+    }
+    
+    func showAlert(_ message:String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openURL(url:String){
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+    }
+    
     
 }

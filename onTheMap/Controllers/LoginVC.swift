@@ -24,21 +24,15 @@ class LoginVC: UIViewController {
         emailTF.delegate = self
         passwordTF.delegate = self
         disableLoginButton(true)
+        [emailTF, passwordTF].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
+
         
     }
-    
     
     func updateUI(){
         addRedius(component: emailTF)
         addRedius(component: passwordTF)
         addRedius(component: loginButton)
-    }
-    func addRedius(component: UIControl){
-        component.layer.cornerRadius = 5
-        component.layer.borderColor = UIColor.lightGray.cgColor
-        component.layer.borderWidth = 0.5
-        component.clipsToBounds = true
-        
     }
     func disableLoginButton(_ disable:Bool){
         if disable{
@@ -50,7 +44,6 @@ class LoginVC: UIViewController {
             loginButton.alpha = 1.0
         }
     }
-    
     
     @IBAction func login(){
         self.view.endEditing(true)
@@ -72,14 +65,29 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func signup(){
-        UIApplication.shared.open(URL(string: Constants.SIGNUP_URL)!, options: [:], completionHandler: nil)
+        openURL(url: Constants.SIGNUP_URL)
     }
 
 }
 
 extension LoginVC : UITextFieldDelegate{
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+    @objc func editingChanged(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        guard let email = emailTF.text, !email.isEmpty,let pass = passwordTF.text, !pass.isEmpty else {
+                disableLoginButton(true)
+                return
+        }
+        disableLoginButton(false)
+    }
+    
+    
+    /*func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
         if emailTF.text!.isEmpty || passwordTF.text!.isEmpty{
             disableLoginButton(true)
         } else {
@@ -87,7 +95,7 @@ extension LoginVC : UITextFieldDelegate{
         }
         return true
     }
-    
+    */
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.becomeFirstResponder()
     }
@@ -103,11 +111,7 @@ extension LoginVC : UITextFieldDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    func showAlert(_ message:String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+
     func loadingIndicator(_ show:Bool) {
         if(show){
             loginButton.isEnabled = false
@@ -122,8 +126,6 @@ extension LoginVC : UITextFieldDelegate{
             activityIndicator.stopAnimating()
             activityIndicator.removeFromSuperview()
         }
-        
-        
     }
 }
 

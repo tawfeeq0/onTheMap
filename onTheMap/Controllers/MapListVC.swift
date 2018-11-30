@@ -18,8 +18,6 @@ class MapListVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         getLocationList()
-        
-
     }
     
     func getLocationList(){
@@ -38,17 +36,15 @@ class MapListVC: UIViewController {
         self.logout()
     }
     
-    
-    @IBAction func addLocation(_ sender: Any) {
-    }
     @IBAction func reloadLocations(_ sender: Any) {
         studentList = []
         tableView.reloadData()
         getLocationList()
     }
     
-    
-    
+    @IBAction func addLocation(_ sender: Any) {
+        self.performSegue(withIdentifier: "addLocation", sender: nil)
+    }
 }
 
 
@@ -64,18 +60,12 @@ extension MapListVC : UITableViewDataSource,UITableViewDelegate{
         cell.textLabel?.text = "\(student.firstName!) \(student.lastName!)"
         cell.detailTextLabel?.text = student.mediaURL
         cell.imageView?.image = UIImage(named: "mapSign")
-        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         if let url = studentList[indexPath.row].mediaURL {
-            UIApplication.shared.open(URL(string:url)!, options: [:], completionHandler: nil)
+            openURL(url: url)
         }
-        
-        
     }
-    
-    
 }

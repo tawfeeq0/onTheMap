@@ -9,7 +9,24 @@
 import UIKit
 import MapKit
 
-struct UserResponse : Codable{
+
+struct Session : Codable {
+    var id : String?
+    var expiration : String?
+}
+
+struct LoginRequest : Codable{
+    var udacity : Udacity?
+    struct Udacity : Codable {
+        var username : String?
+        var password : String?
+    }
+    init(username:String,password:String) {
+        self.udacity = Udacity(username: username, password: password)
+    }
+}
+
+struct LoginResponse : Codable{
     var account : Account?
     var session : Session?
     var result : String?
@@ -17,37 +34,14 @@ struct UserResponse : Codable{
         var registered : Bool?
         var key : String?
     }
-    struct Session : Codable {
-        var id : String?
-        var expiration : String?
-    }
-}
-
-struct UserRequest : Codable{
-    var udacity : Udacity?
-    
-    struct Udacity : Codable {
-        var username : String?
-        var password : String?
-    }
-    
-    init(username:String,password:String) {
-        self.udacity = Udacity(username: username, password: password)
-    }
 }
 
 struct SignoutResponse:Codable{
     var session:Session?
-    
-    struct Session : Codable {
-        var id : String?
-        var expiration : String?
-    }
 }
 
 struct StudentsLocResponse:Codable{
     var results:[Result]?
-    
     struct Result : Codable {
         var uniqueKey : String?
         var firstName : String?

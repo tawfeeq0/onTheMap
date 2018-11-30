@@ -42,11 +42,14 @@ class MapVC: UIViewController {
     @IBAction func logout(_ sender: Any) {
         self.logout()
     }
-    @IBAction func addLocation(_ sender: Any) {
-    }
+    
     @IBAction func reloadLocations(_ sender: Any) {
         mapView.removeAnnotations(mapView.annotations)
         getLocationList()
+    }
+    
+    @IBAction func addLocation(_ sender: Any) {
+        self.performSegue(withIdentifier: "addLocation", sender: nil)
     }
 }
 
@@ -69,7 +72,7 @@ extension MapVC :MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             if let url = view.annotation?.subtitle{
-                UIApplication.shared.open(URL(string: url!)!, options: [:], completionHandler: nil)
+                openURL(url: url!)
             }
         }
     }
