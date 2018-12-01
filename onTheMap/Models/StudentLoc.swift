@@ -46,7 +46,7 @@ class StudentLoc{
                 return
             }
             publicUserResponse = try? JSONDecoder().decode(PublicUserResponse.self, from:data.subdata(in: (5..<data.count)) )
-            if let _ = publicUserResponse?.user?.key {
+            if let _ = publicUserResponse?.key {
                 message =  HttpLoginStatus.SUCCESS.rawValue
             }
             else{

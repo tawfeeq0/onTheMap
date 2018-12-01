@@ -53,13 +53,10 @@ struct StudentsLocResponse:Codable{
 }
 
 struct PublicUserResponse:Codable{
-    var user:User?
-    struct User : Codable {
-        var key : String?
-        var first_name : String?
-        var last_name : String?
-        var nickname : String?
-    }
+    var key : String?
+    var first_name : String?
+    var last_name : String?
+    var nickname : String?
 }
 
 struct AddLocationRequest:Codable {

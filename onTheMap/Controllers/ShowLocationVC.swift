@@ -39,7 +39,7 @@ class ShowLocationVC: UIViewController {
             }
             
             if message == HttpLoginStatus.SUCCESS.rawValue {
-                let info = AddLocationRequest(uniqueKey:response.user?.key,firstName:response.user?.first_name,lastName:response.user?.last_name,mapString:self.mark!.name,mediaURL:self.mediaUrl,latitude:self.mark!.location?.coordinate.latitude,longitude:self.mark!.location?.coordinate.longitude)
+                let info = AddLocationRequest(uniqueKey:response.key,firstName:response.first_name,lastName:response.last_name,mapString:self.mark!.name,mediaURL:self.mediaUrl,latitude:self.mark!.location?.coordinate.latitude,longitude:self.mark!.location?.coordinate.longitude)
                 
                 StudentLoc.addLocation(info: info, callback: { (response) in
                     self.loadingIndicator(false)
