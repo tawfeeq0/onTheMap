@@ -25,6 +25,7 @@ class MapVC: UIViewController {
     func getLocationList(){
         StudentLoc.getLocationList(params: studentLocParams) { (message,response) in
             guard let response = response else{
+                self.showAlert(HttpLoginStatus.RESPONSE_ERROR.rawValue)
                 return
             }
             if let results = response.results {
@@ -35,6 +36,10 @@ class MapVC: UIViewController {
                     annotation.coordinate = CLLocationCoordinate2D(latitude: student.latitude!, longitude: student.longitude!)
                     self.mapView.addAnnotation(annotation)
                 }
+            }
+            else {
+                self.showAlert(message)
+                return
             }
         }
     }

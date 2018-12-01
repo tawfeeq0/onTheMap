@@ -12,7 +12,8 @@ class MapListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let studentLocParams = StudentLocParams(limit:100,skip:0,order:"-updatedAt",search:nil)
-    var studentList = [StudentsLocResponse.Result]()
+    //var studentList = [StudentResult]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -23,11 +24,16 @@ class MapListVC: UIViewController {
     func getLocationList(){
         StudentLoc.getLocationList(params: studentLocParams) { (message,response) in
             guard let response = response else{
+                self.showAlert(HttpLoginStatus.RESPONSE_ERROR.rawValue)
                 return
             }
             if let results = response.results {
-                self.studentList = results
+                self.appDelegate.studentList = results
                 self.tableView.reloadData()
+            }
+            else {
+                self.showAlert(message)
+                return
             }
         }
     }
@@ -37,7 +43,7 @@ class MapListVC: UIViewController {
     }
     
     @IBAction func reloadLocations(_ sender: Any) {
-        studentList = []
+        appDelegate.studentList = []
         tableView.reloadData()
         getLocationList()
     }
@@ -50,13 +56,13 @@ class MapListVC: UIViewController {
 
 extension MapListVC : UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studentList.count
+        return appDelegate.studentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath)
         
-        let student = studentList[indexPath.row]
+        let student = appDelegate.studentList[indexPath.row]
         cell.textLabel?.text = "\(student.firstName ?? "N/A") \(student.lastName ?? "N/A")"
         cell.detailTextLabel?.text = student.mediaURL
         cell.imageView?.image = UIImage(named: "mapSign")
@@ -64,7 +70,7 @@ extension MapListVC : UITableViewDataSource,UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let url = studentList[indexPath.row].mediaURL {
+        if let url = appDelegate.studentList[indexPath.row].mediaURL {
             openURL(url: url)
         }
     }

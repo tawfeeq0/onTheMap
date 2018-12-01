@@ -41,15 +41,16 @@ struct SignoutResponse:Codable{
 }
 
 struct StudentsLocResponse:Codable{
-    var results:[Result]?
-    struct Result : Codable {
-        var uniqueKey : String?
-        var firstName : String?
-        var lastName : String?
-        var mediaURL : String?
-        var latitude : Double?
-        var longitude : Double?
-    }
+    var results:[StudentResult]?
+
+}
+struct StudentResult : Codable {
+    var uniqueKey : String?
+    var firstName : String?
+    var lastName : String?
+    var mediaURL : String?
+    var latitude : Double?
+    var longitude : Double?
 }
 
 struct PublicUserResponse:Codable{

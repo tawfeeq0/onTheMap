@@ -11,8 +11,8 @@ class StudentLoc{
     static var studentsLocResponse : StudentsLocResponse?
     static var publicUserResponse : PublicUserResponse?
     static var addLocationResponse : AddLocationResponse?
-    static func getLocationList(params:StudentLocParams,callback:@escaping  (String?,StudentsLocResponse?)->Void){
-        var message:String?
+    static func getLocationList(params:StudentLocParams,callback:@escaping  (String,StudentsLocResponse?)->Void){
+        var message:String = ""
         
         HttpRequest.getData(from: params.getUrl(), method: HttpMethod.GET, header:Constants.HEADER_AUTH,hasCookie: false, body: nil) { (data, response, error) in
             guard let data = data, error == nil else {

@@ -208,7 +208,6 @@
                     <tabBarItem key="tabBarItem" title="" image="table_30x30" landscapeImage="table_30x30" largeContentSizeImage="table_30x30" selectedImage="table_30x30" id="dKf-pS-M9u"/>
                     <connections>
                         <outlet property="tableView" destination="7jj-iJ-d7M" id="p62-I5-Hlv"/>
-                        <segue destination="dsx-9C-AFz" kind="show" identifier="logout" id="M0G-ct-UYt"/>
                         <segue destination="dsN-vn-Zk4" kind="presentation" identifier="addLocation" id="Bho-CV-atC"/>
                     </connections>
                 </viewController>
@@ -267,7 +266,6 @@
                     <tabBarItem key="tabBarItem" title="" image="map_30x30" landscapeImage="map_30x30" largeContentSizeImage="map_30x30" selectedImage="map_30x30" id="1eY-co-sVc"/>
                     <connections>
                         <outlet property="mapView" destination="IgA-BT-Ilk" id="PuZ-Dz-Of1"/>
-                        <segue destination="dsx-9C-AFz" kind="show" identifier="logout" id="X9a-89-eh0"/>
                         <segue destination="dsN-vn-Zk4" kind="presentation" identifier="addLocation" id="Ihb-y4-M4i"/>
                     </connections>
                 </viewController>
@@ -467,7 +465,6 @@
         <image name="udacity_logo" width="1878.2608642578125" height="1878.2608642578125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bho-CV-atC"/>
-        <segue reference="M0G-ct-UYt"/>
+        <segue reference="Ihb-y4-M4i"/>
     </inferredMetricsTieBreakers>
 </document>

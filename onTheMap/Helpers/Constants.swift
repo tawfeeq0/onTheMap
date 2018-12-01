@@ -22,7 +22,8 @@ enum HttpLoginStatus : String {
     case SUCCESS = "SUCCESS"
     case NETWORK_ERROR = "Network not avaiable"
     case AUTH_ERROR = "Username or password are incorrect"
-    case DATA_ERROR = "Login information are corrupted."
+    case DATA_ERROR = "Information are corrupted"
+    case RESPONSE_ERROR = "Wrong Data"
 }
 
 enum HttpMethod : String{

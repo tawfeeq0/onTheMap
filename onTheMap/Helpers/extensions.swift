@@ -30,7 +30,7 @@ extension UIViewController{
                 return
             }
             if response == HttpLoginStatus.SUCCESS.rawValue {
-                self.performSegue(withIdentifier: "logout", sender: nil)
+                self.dismiss(animated: true, completion: nil)
                 return
             }
             else {

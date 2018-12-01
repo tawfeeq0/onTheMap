@@ -35,6 +35,7 @@ class ShowLocationVC: UIViewController {
             
             guard let response = response else{
                 self.loadingIndicator(false)
+                self.showAlert(HttpLoginStatus.RESPONSE_ERROR.rawValue)
                 return
             }
             
@@ -44,6 +45,7 @@ class ShowLocationVC: UIViewController {
                 StudentLoc.addLocation(info: info, callback: { (response) in
                     self.loadingIndicator(false)
                     guard let response = response else {
+                        self.showAlert(HttpLoginStatus.RESPONSE_ERROR.rawValue)
                         return
                     }
                     if response == HttpLoginStatus.SUCCESS.rawValue {
@@ -72,6 +74,10 @@ class ShowLocationVC: UIViewController {
             annotation.coordinate = CLLocationCoordinate2D(latitude: (mark.location?.coordinate.latitude)!, longitude: (mark.location?.coordinate.longitude)!)
             mapView.addAnnotation(annotation)
             mapView.region.center = (mark.location?.coordinate)!
+            if let userLocation = mark.location?.coordinate {
+                let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+                mapView.setRegion(viewRegion, animated: false)
+            }
             mapView.selectAnnotation(mapView.annotations[0], animated: true)
         }
     }
